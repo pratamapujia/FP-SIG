@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jun 2021 pada 08.15
+-- Waktu pembuatan: 22 Jun 2021 pada 01.03
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.4.19
 
@@ -20,6 +20,50 @@ SET time_zone = "+00:00";
 --
 -- Database: `sig2021`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `login`
+--
+
+CREATE TABLE `login` (
+  `id` int(10) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `login`
+--
+
+INSERT INTO `login` (`id`, `email`, `password`) VALUES
+(1, 'creadycelgie03@gmail.com', 'cready2000'),
+(2, 'admin@gmail.com', 'admin123');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `map`
+--
+
+CREATE TABLE `map` (
+  `id` int(11) NOT NULL,
+  `desk` varchar(50) NOT NULL,
+  `latitude` varchar(50) NOT NULL,
+  `longitude` varchar(50) NOT NULL,
+  `color` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `map`
+--
+
+INSERT INTO `map` (`id`, `desk`, `latitude`, `longitude`, `color`) VALUES
+(1, 'Ibukota Abdya', '3.818570', '96.831841', 'Purple'),
+(2, 'Kab.Aceh Jaya', '4.727890', '95.601373', 'Orange'),
+(3, 'Ibukota Kotamadya Sabang', '5.909284', '95.304742', 'Yellow'),
+(4, 'Ibukota Kotamadya Langsa', '4.476020', '97.952447', 'Blue');
 
 -- --------------------------------------------------------
 
@@ -75,6 +119,18 @@ INSERT INTO `rumah_sakit` (`id`, `rumah_sakit`, `type`, `jalan`, `telepon`, `lon
 --
 
 --
+-- Indeks untuk tabel `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `map`
+--
+ALTER TABLE `map`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `rumah_sakit`
 --
 ALTER TABLE `rumah_sakit`
@@ -83,6 +139,18 @@ ALTER TABLE `rumah_sakit`
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `login`
+--
+ALTER TABLE `login`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `map`
+--
+ALTER TABLE `map`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `rumah_sakit`
