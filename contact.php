@@ -1,5 +1,7 @@
 <?php
 session_start();
+$koneksi = new mysqli("localhost", "root", "", "sig2021");
+
 if (!isset($_SESSION['pengguna'])) {
   echo "<script>alert('Anda harus login');</script>";
   echo "<script>location='login.php';</script>";
@@ -62,10 +64,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Left navbar links -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a href="index.php" class="nav-link active">Home</a>
+              <a href="index.php" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-              <a href="contact.php" class="nav-link">Contact</a>
+              <a href="contact.php" class="nav-link active">Contact</a>
             </li>
           </ul>
         </div>
@@ -88,19 +90,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-12">
-              <h3 class="text-center">Peta Persebaran Rumah Sakit di Sidoarjo Berdasarkan Tipe</h3>
+              <h3 class="text-center">TIM PENGEMBANG</h3>
             </div>
           </div>
         </div>
       </section>
       <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <!-- <div id="myMap" style="height: 500px"></div> -->
-                  <div id="mapid" style="height: 550px;"></div>
+        <div class="card card-solid">
+          <div class="card-body pb-0">
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                <div class="card bg-light d-flex flex-fill">
+                  <div class="card-header text-muted border-bottom-0">
+                    TIM PENGEMBANG
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="row">
+                      <div class="col-7">
+                        <h2 class="lead"><b>Pratama Puji Ariyanto</b></h2>
+                        <p class="text-muted text-sm"><b>NPM: </b> 18082010016 </p>
+                      </div>
+                      <div class="col-5 text-center">
+                        <img src="dist/img/1.jpg" alt="user-avatar" class="img img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                <div class="card bg-light d-flex flex-fill">
+                  <div class="card-header text-muted border-bottom-0">
+                    TIM PENGEMBANG
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="row">
+                      <div class="col-7">
+                        <h2 class="lead"><b>Cready Celgie G.</b></h2>
+                        <p class="text-muted text-sm"><b>NPM: </b> 18082010031 </p>
+                      </div>
+                      <div class="col-5 text-center">
+                        <img src="dist/img/3.jpeg" alt="user-avatar" class="img img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                <div class="card bg-light d-flex flex-fill">
+                  <div class="card-header text-muted border-bottom-0">
+                    TIM PENGEMBANG
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="row">
+                      <div class="col-7">
+                        <h2 class="lead"><b>Cahyo Joyo Prawiro</b></h2>
+                        <p class="text-muted text-sm"><b>NPM: </b> 18082010034 </p>
+                      </div>
+                      <div class="col-5 text-center">
+                        <img src="dist/img/2.png" alt="user-avatar" class="img img-fluid">
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -115,85 +165,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </footer>
   </div>
   <!-- ./wrapper -->
-
-  <!-- REQUIRED SCRIPTS -->
-
-  <script>
-    // var mymap = L.map('mapid').setView([-7.444694024689493, 112.69966657585864], 11);
-
-    // Layer Group per type rumah sakit
-    var typeB = L.layerGroup();
-    <?php foreach ($typeB as $B) { ?>
-      L.marker([<?= $B['latitude']; ?>, <?= $B['longitude']; ?>]).bindPopup('<b><?= $B['rumah_sakit']; ?> (<?= $B['type']; ?>)</b><br/>' + '<?= $B['jalan']; ?></br>' + '<?= $B['telepon']; ?>').addTo(typeB);
-    <?php } ?>
-
-    var typeC = L.layerGroup();
-    <?php foreach ($typeC as $C) { ?>
-      L.marker([<?= $C['latitude']; ?>, <?= $C['longitude']; ?>]).bindPopup('<b><?= $C['rumah_sakit']; ?> (<?= $C['type']; ?>)</b><br/>' + '<?= $C['jalan']; ?></br>' + '<?= $C['telepon']; ?>').addTo(typeC);
-    <?php } ?>
-
-    var typeD = L.layerGroup();
-    <?php foreach ($typeD as $D) { ?>
-      L.marker([<?= $D['latitude']; ?>, <?= $D['longitude']; ?>]).bindPopup('<b><?= $D['rumah_sakit']; ?> (<?= $D['type']; ?>)</b><br/>' + '<?= $D['jalan']; ?></br>' + '<?= $D['telepon']; ?>').addTo(typeD);
-    <?php } ?>
-
-    //Api map dan data Map
-    var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-    //vector layer
-    var streets = L.tileLayer(mbUrl, {
-      id: 'mapbox/streets-v11',
-      tileSize: 512,
-      zoomOffset: -1,
-      attribution: mbAttr
-    });
-
-    //Add map
-    var mymap = L.map('mapid', {
-      center: [-7.422887249265226, 112.67081476825689],
-      zoom: 11,
-      layers: [streets, typeB, typeC, typeD]
-    });
-
-    //Add tema layer
-    var baseLayers = {
-      "Streets": streets
-    };
-
-    //Add group layers
-    var overlays = {
-      "RS Tipe B": typeB,
-      "RS Tipe C": typeC,
-      "RS Tipe D": typeD
-    };
-
-    //menampilkan multilayer
-    L.control.layers(baseLayers, overlays).addTo(mymap);
-
-    //menambahkan label pada area kecamatan
-    function onEachFeature(feature, layer) {
-      var popupContent = "<p>Kecamatan " + feature.properties.party + "</p>";
-      layer.bindPopup(popupContent);
-    }
-    //menambahkan label ke map
-    L.geoJSON(kecamatan, {
-      onEachFeature: onEachFeature
-    }).addTo(mymap);
-
-    var circle = L.circle([-7.4569227762611945, 112.7140761327546], {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5,
-      radius: 3000
-    }).bindPopup("<p>Radius 3 KM dari pusat Sidoarjo</p>").addTo(mymap);
-
-    // </?php foreach ($sql as $s) : ?>
-    //   L.marker([</?= $s['latitude']; ?>, </?= $s['longitude']; ?>]).addTo(mymap)
-    //     .bindPopup("<b></?= $s['rumah_sakit']; ?></b><br/>" + "Alamat : </?= $s['jalan']; ?>");
-    // </?php endforeach ?>
-  </script>
 
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
