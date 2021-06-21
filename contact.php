@@ -108,7 +108,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-7">
                         <h2 class="lead"><b>Pratama Puji Ariyanto</b></h2>
-                        <p class="text-muted text-sm"><b>NPM: </b> 18082010016 </p>
+                        <p class="text-muted text-sm"><b>NPM : </b> 18082010016 </p>
+                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telp : +62 838-3069-4069</li>
+                        </ul>
                       </div>
                       <div class="col-5 text-center">
                         <img src="dist/img/1.jpg" alt="user-avatar" class="img img-fluid">
@@ -126,7 +129,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-7">
                         <h2 class="lead"><b>Cready Celgie G.</b></h2>
-                        <p class="text-muted text-sm"><b>NPM: </b> 18082010031 </p>
+                        <p class="text-muted text-sm"><b>NPM : </b> 18082010031 </p>
+                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telp : +62 822-3001-3246</li>
+                        </ul>
                       </div>
                       <div class="col-5 text-center">
                         <img src="dist/img/3.jpeg" alt="user-avatar" class="img img-fluid">
@@ -144,7 +150,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-7">
                         <h2 class="lead"><b>Cahyo Joyo Prawiro</b></h2>
-                        <p class="text-muted text-sm"><b>NPM: </b> 18082010034 </p>
+                        <p class="text-muted text-sm"><b>NPM : </b> 18082010034 </p>
+                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telp : +62 812-4901-6492</li>
+                        </ul>
                       </div>
                       <div class="col-5 text-center">
                         <img src="dist/img/2.png" alt="user-avatar" class="img img-fluid">
