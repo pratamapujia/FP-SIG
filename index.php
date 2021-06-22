@@ -38,9 +38,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
   <script src="dist/js/sidoarjo.js"></script>
   <!-- Map Cluster -->
-  <link rel="stylesheet" href="dist/css/MarkerCluster.css">
-  <link rel="stylesheet" href="dist/css/MarkerCluster.Default.css">
-  <script src="dist/js/leaflet.markercluster-src.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" charset="utf-8"></script>
+
+  <!-- Map Radius -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.73.0/dist/L.Control.Locate.css" integrity="sha256-EeDu9q7hdz6S/FWLehOLjXhw0pxm9Kfq0OTvFw4hYUI=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/leaflet.locatecontrol@0.73.0/dist/L.Control.Locate.min.css,npm/leaflet.locatecontrol@0.73.0/dist/L.Control.Locate.mapbox.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.73.0/src/L.Control.Locate.js" integrity="sha256-sMpm6ogcKNIgSfXNdMS7N/h6+CLucWZ9XaHQnu+u7W0=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -123,18 +128,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     // Layer Group per type rumah sakit
     var typeB = L.layerGroup();
-    <?php foreach ($typeB as $B) { ?>
-      L.marker([<?= $B['latitude']; ?>, <?= $B['longitude']; ?>]).bindPopup('<b><?= $B['rumah_sakit']; ?> (<?= $B['type']; ?>)</b><br/>' + '<?= $B['jalan']; ?></br>' + '<?= $B['telepon']; ?>').addTo(typeB);
-    <?php } ?>
-
     var typeC = L.layerGroup();
-    <?php foreach ($typeC as $C) { ?>
-      L.marker([<?= $C['latitude']; ?>, <?= $C['longitude']; ?>]).bindPopup('<b><?= $C['rumah_sakit']; ?> (<?= $C['type']; ?>)</b><br/>' + '<?= $C['jalan']; ?></br>' + '<?= $C['telepon']; ?>').addTo(typeC);
+    var typeD = L.layerGroup();
+    var iconRed = L.icon({
+      iconUrl: 'red.png',
+      iconSize: [45, 55]
+    });
+    var iconBlue = L.icon({
+      iconUrl: 'blue.png',
+      iconSize: [45, 55]
+    });
+    var iconYellow = L.icon({
+      iconUrl: 'yellow.png',
+      iconSize: [45, 55]
+    });
+
+    <?php foreach ($typeB as $B) { ?>
+      L.marker([<?= $B['latitude']; ?>, <?= $B['longitude']; ?>], {
+        icon: iconRed
+      }).bindPopup('<b><?= $B['rumah_sakit']; ?> (<?= $B['type']; ?>)</b><br/>' + '<?= $B['jalan']; ?></br>' + '<?= $B['telepon']; ?>').addTo(typeB);
     <?php } ?>
 
-    var typeD = L.layerGroup();
+    <?php foreach ($typeC as $C) { ?>
+      L.marker([<?= $C['latitude']; ?>, <?= $C['longitude']; ?>], {
+        icon: iconBlue
+      }).bindPopup('<b><?= $C['rumah_sakit']; ?> (<?= $C['type']; ?>)</b><br/>' + '<?= $C['jalan']; ?></br>' + '<?= $C['telepon']; ?>').addTo(typeC);
+    <?php } ?>
+
     <?php foreach ($typeD as $D) { ?>
-      L.marker([<?= $D['latitude']; ?>, <?= $D['longitude']; ?>]).bindPopup('<b><?= $D['rumah_sakit']; ?> (<?= $D['type']; ?>)</b><br/>' + '<?= $D['jalan']; ?></br>' + '<?= $D['telepon']; ?>').addTo(typeD);
+      L.marker([<?= $D['latitude']; ?>, <?= $D['longitude']; ?>], {
+        icon: iconYellow
+      }).bindPopup('<b><?= $D['rumah_sakit']; ?> (<?= $D['type']; ?>)</b><br/>' + '<?= $D['jalan']; ?></br>' + '<?= $D['telepon']; ?>').addTo(typeD);
     <?php } ?>
 
     //Api map dan data Map
@@ -149,12 +173,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
       zoomOffset: -1,
       attribution: mbAttr
     });
+    // Add Cluster
+    var clusters = L.markerClusterGroup();
+    clusters.addLayer(typeB);
+    clusters.addLayer(typeC);
+    clusters.addLayer(typeD);
 
     //Add map
     var mymap = L.map('mapid', {
       center: [-7.422887249265226, 112.67081476825689],
       zoom: 11,
-      layers: [streets, typeB, typeC, typeD]
+      layers: [streets, clusters]
     });
 
     //Add tema layer
@@ -166,7 +195,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     var overlays = {
       "RS Tipe B": typeB,
       "RS Tipe C": typeC,
-      "RS Tipe D": typeD
+      "RS Tipe D": typeD,
+      "Clusters": clusters
     };
 
     //menampilkan multilayer
