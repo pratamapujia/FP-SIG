@@ -173,6 +173,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       zoomOffset: -1,
       attribution: mbAttr
     });
+    var satelite = L.tileLayer(mbUrl, {
+      id: 'mapbox/satellite-v9',
+      tileSize: 512,
+      zoomOffset: -1,
+      attribution: mbAttr
+    });
     // Add Cluster
     var clusters = L.markerClusterGroup();
     clusters.addLayer(typeB);
@@ -188,7 +194,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     //Add tema layer
     var baseLayers = {
-      "Streets": streets
+      "Streets": streets,
+      "Satelit": satelite
     };
 
     //Add group layers
