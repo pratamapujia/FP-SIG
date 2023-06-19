@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost", "root", "", "sig2021");
+$koneksi = new mysqli("localhost", "root", "", "db-sig");
 
 if (!isset($_SESSION['pengguna'])) {
   echo "<script>alert('Anda harus login');</script>";
@@ -9,7 +9,7 @@ if (!isset($_SESSION['pengguna'])) {
   exit();
 }
 
-$conn = mysqli_connect("localhost", "root", "", "sig2021");
+$conn = mysqli_connect("localhost", "root", "", "db-sig");
 $sql = mysqli_query($conn, "SELECT * FROM rumah_sakit");
 $typeB = mysqli_query($conn, "SELECT * FROM rumah_sakit WHERE type = 'B'");
 $typeC = mysqli_query($conn, "SELECT * FROM rumah_sakit WHERE type = 'C'");
